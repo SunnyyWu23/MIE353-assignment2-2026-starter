@@ -1,3 +1,6 @@
+// compile the code before running: 
+// type mvn clean compile in terminal
+
 package org.example;
 
 // General Helper Imports
@@ -38,8 +41,19 @@ public class Main {
         CMS.commit();
         
         // EXTRA MAIN FUNCTION CALLS CAN GO BELOW:
-
-
+        List<GradCourses.Row> gradCourses_list = getGradCourses(); // print out gradCourses
+        for (GradCourses.Row course : gradCourses_list) {
+          out.println(course.getCourseId() + " " + course.getCourseName());
+        }
+        saveGradCourses();
+        runQuery1();
+        runQuery2();
+        runQuery3();
+        runQuery4();
+        runQuery5();
+        runQuery6();
+        runQuery7();
+        runQuery8();
         
       }
       catch (Exception e) {
@@ -54,6 +68,7 @@ public class Main {
     loadProfessorData();
     loadCourseData();
     loadTranscriptData();
+    loadTeachesData();
   }
 
   public static void loadStudentData() throws SQLException {
@@ -80,6 +95,86 @@ public class Main {
   public static void loadTranscriptData() throws SQLException {
     CMS.addSqlChange(ctx -> {
       LoadTranscript.execute(ctx);
+    });
+    CMS.commit();
+  }
+
+  public static void loadTeachesData() throws SQLException {
+    CMS.addSqlChange(ctx -> {
+      LoadTeaches.execute(ctx);
+    });
+    CMS.commit();
+  }
+
+  public static List<GradCourses.Row> getGradCourses() throws SQLException {
+    List<GradCourses.Row> courses_list = new java.util.ArrayList<>();
+    for (GradCourses.Row row: GradCourses.fetch()) {
+      courses_list.add(row);
+    }
+    return courses_list;
+  }
+
+  // SQL file to select and export, java method to execute.  
+  public static void saveGradCourses() throws SQLException {
+    CMS.addSqlChange(ctx -> {
+      SaveGradCourses.execute(ctx);
+    });
+    CMS.commit();
+  }
+
+  // each each method runQueryi runs queryi where i = {1,2,3,4,5,6,7,8}
+  public static void runQuery1() throws SQLException {
+    CMS.addSqlChange(ctx -> {
+      query1.execute(ctx);
+    });
+    CMS.commit();
+  }
+
+  public static void runQuery2() throws SQLException {
+    CMS.addSqlChange(ctx -> {
+      query2.execute(ctx);
+    });
+    CMS.commit();
+  }
+
+  public static void runQuery3() throws SQLException {
+    CMS.addSqlChange(ctx -> {
+      query3.execute(ctx);
+    });
+    CMS.commit();
+  }
+
+  public static void runQuery4() throws SQLException {
+    CMS.addSqlChange(ctx -> {
+      query4.execute(ctx);
+    });
+    CMS.commit();
+  }
+
+  public static void runQuery5() throws SQLException {
+    CMS.addSqlChange(ctx -> {
+      query5.execute(ctx);
+    });
+    CMS.commit();
+  }
+
+  public static void runQuery6() throws SQLException {
+    CMS.addSqlChange(ctx -> {
+      query6.execute(ctx);
+    });
+    CMS.commit();
+  }
+
+  public static void runQuery7() throws SQLException {
+    CMS.addSqlChange(ctx -> {
+      query7.execute(ctx);
+    });
+    CMS.commit();
+  }
+
+  public static void runQuery8() throws SQLException {
+    CMS.addSqlChange(ctx -> {
+      query8.execute(ctx);
     });
     CMS.commit();
   }
